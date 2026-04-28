@@ -295,5 +295,5 @@ function finalizar(){
 
     msg += "\nTotal: R$" + total.toFixed(2);
 
-    window.open("https://wa.me/5581999999999?text=" + encodeURIComponent(msg));
+    window.open("https://wa.me/5587991292282?text=" + encodeURIComponent(msg));
 }
