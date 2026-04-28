@@ -287,13 +287,28 @@ function removerItem(index){
 // =========================
 function finalizar(){
 
-    let msg = "Pedido Logus Açaí\n\n";
+    let msg = "🍧 Pedido Logus Açaí\n\n";
 
-    carrinho.forEach(i=>{
-        msg += `${i.nome} - ${i.nomeTam} - R$${i.valor.toFixed(2)}\n`;
-    });
+carrinho.forEach(i => {
 
-    msg += "\nTotal: R$" + total.toFixed(2);
+    msg += `${i.nome} - ${i.nomeTam}\n`;
+
+    if(i.caldas && i.caldas.length > 0){
+        msg += `Caldas: ${i.caldas.join(", ")}\n`;
+    }
+
+    if(i.comps && i.comps.length > 0){
+        msg += `Complementos: ${i.comps.join(", ")}\n`;
+    }
+
+    if(i.adds && i.adds.length > 0){
+        msg += `Adicionais: ${i.adds.join(", ")}\n`;
+    }
+
+    msg += `Valor: R$${i.valor.toFixed(2)}\n\n`;
+});
+
+msg += `💰 Total: R$${total.toFixed(2)}`;
 
     window.open("https://wa.me/5587991292282?text=" + encodeURIComponent(msg));
 }
