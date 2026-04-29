@@ -263,3 +263,33 @@ input, select {
         width: 85px;
     }
 }
+.opcoes-pagamento {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.opcoes-pagamento label {
+    flex: 1;
+    text-align: center;
+    background: #4d0563;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.opcoes-pagamento input {
+    display: none;
+}
+
+/* quando selecionado */
+.opcoes-pagamento input:checked + span,
+.opcoes-pagamento input:checked {
+    accent-color: purple;
+}
+
+.opcoes-pagamento label:has(input:checked) {
+    background: #ebc90b;
+    border: 2px solid purple;
+}
