@@ -287,7 +287,7 @@ function removerItem(index){
 // =========================
 function finalizar(){
 
-    let msg = "🍧 Pedido Logus Açaí\n\n";
+    let msg = "💜 Pedido Logus Açaí 💜\n\n";
 
 carrinho.forEach(i => {
 
