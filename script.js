@@ -296,12 +296,13 @@ function finalizar(){
 
     formaPagamento = formaPagamento.value;
 
-    let msg = "💜🍇 *LOGUS AÇAÍ* 🍇💜\n";
+    let msg = "💜 *LOGUS AÇAÍ* 💜\n";
     msg += "━━━━━━━━━━━━━━\n\n";
 
     carrinho.forEach(i => {
 
-        msg += `🍧 *${i.nome} - ${i.nomeTam}*\n`;
+        msg += ` *${i.nome}*\n`;
+        msg += `🍧 *${i.nomeTam}*\n`;
 
         if(i.caldas && i.caldas.length > 0){
             msg += `🍯 Caldas: ${i.caldas.join(", ")}\n`;
