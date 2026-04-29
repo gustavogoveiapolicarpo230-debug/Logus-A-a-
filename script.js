@@ -287,28 +287,40 @@ function removerItem(index){
 // =========================
 function finalizar(){
 
-    let msg = "💜 Pedido Logus Açaí 💜\n\n";
+    let formaPagamento = document.querySelector('input[name="pagamento"]:checked');
 
-carrinho.forEach(i => {
-
-    msg += `${i.nome} - ${i.nomeTam}\n`;
-
-    if(i.caldas && i.caldas.length > 0){
-        msg += `Caldas: ${i.caldas.join(", ")}\n`;
+    if (!formaPagamento) {
+        alert("Selecione a forma de pagamento!");
+        return;
     }
 
-    if(i.comps && i.comps.length > 0){
-        msg += `Complementos: ${i.comps.join(", ")}\n`;
-    }
+    formaPagamento = formaPagamento.value;
 
-    if(i.adds && i.adds.length > 0){
-        msg += `Adicionais: ${i.adds.join(", ")}\n`;
-    }
+    let msg = "💜🍇 *LOGUS AÇAÍ* 🍇💜\n";
+    msg += "━━━━━━━━━━━━━━\n\n";
 
-    msg += `Valor: R$${i.valor.toFixed(2)}\n\n`;
-});
+    carrinho.forEach(i => {
 
-msg += `💰 Total: R$${total.toFixed(2)}`;
+        msg += `🍧 *${i.nome} - ${i.nomeTam}*\n`;
+
+        if(i.caldas && i.caldas.length > 0){
+            msg += `🍯 Caldas: ${i.caldas.join(", ")}\n`;
+        }
+
+        if(i.comps && i.comps.length > 0){
+            msg += `🥣 Complementos: ${i.comps.join(", ")}\n`;
+        }
+
+        if(i.adds && i.adds.length > 0){
+            msg += `➕ Adicionais: ${i.adds.join(", ")}\n`;
+        }
+
+        msg += `💲 Valor: R$${i.valor.toFixed(2)}\n\n`;
+    });
+
+    msg += "━━━━━━━━━━━━━━\n";
+    msg += `💰 *Total: R$${total.toFixed(2)}*\n`;
+    msg += `💳 Pagamento: ${formaPagamento}\n`;
 
     window.open("https://wa.me/5587991292282?text=" + encodeURIComponent(msg));
 }
