@@ -154,9 +154,13 @@ function adicionar(){
     let comps  = [...document.querySelectorAll(".comp:checked")].map(e => e.value);
     let adds   = [...document.querySelectorAll(".add:checked")].map(e => e.value);
 
-    console.log(caldas, comps, adds); // 👈 DEBUG
+    // ✅ NOVO - FRUTAS
+    let frutas = [...document.querySelectorAll(".fruta:checked")].map(e => e.value);
 
-    let valor = base + (adds.length * 2.5);
+    console.log(caldas, comps, adds, frutas); // DEBUG
+
+    // 💰 cálculo atualizado
+    let valor = base + (adds.length * 2.5) + (frutas.length * 2.5);
 
     total += valor;
 
@@ -166,13 +170,13 @@ function adicionar(){
         caldas,
         comps,
         adds,
+        frutas, // 👈 importante
         valor
     });
 
     atualizarCarrinho();
     fecharModal();
 }
-
 
 // =========================
 // CREMOSINHO ADD
@@ -246,19 +250,21 @@ function atualizarCarrinho(){
 
         let li = document.createElement("li");
 
-        let caldas = item.caldas.length ? item.caldas.join(", ") : "Nenhuma";
-        let comps  = item.comps.length ? item.comps.join(", ") : "Nenhum";
-        let adds   = item.adds.length ? item.adds.join(", ") : "Nenhum";
+        let caldas = item.caldas && item.caldas.length ? item.caldas.join(", ") : "Nenhuma";
+        let comps  = item.comps && item.comps.length ? item.comps.join(", ") : "Nenhum";
+        let adds   = item.adds && item.adds.length ? item.adds.join(", ") : "Nenhum";
+        let frutas = item.frutas && item.frutas.length ? item.frutas.join(", ") : "Nenhuma";
 
         li.innerHTML = `
-            <b>${item.nome}</b><br>
-            ${item.nomeTam}<br>
+            <b>🍧 ${item.nome}</b><br>
+            <small>${item.nomeTam}</small><br><br>
 
-            <small>Caldas: ${caldas}</small><br>
-            <small>Complementos: ${comps}</small><br>
-            <small>Adicionais: ${adds}</small><br>
+            <small>🍯 Caldas: ${caldas}</small><br>
+            <small>🥣 Complementos: ${comps}</small><br>
+            <small>➕ Adicionais: ${adds}</small><br>
+            <small>🍓 Frutas: ${frutas}</small><br><br>
 
-            <b>R$ ${item.valor.toFixed(2)}</b><br>
+            <b>💰 R$ ${item.valor.toFixed(2)}</b><br><br>
 
             <button onclick="removerItem(${index})">❌ Remover</button>
         `;
@@ -267,7 +273,7 @@ function atualizarCarrinho(){
     });
 
     document.getElementById("total").innerText =
-        "Total: R$ " + total.toFixed(2);
+        "💰 Total: R$ " + total.toFixed(2);
 }
 
 // =========================
@@ -296,13 +302,12 @@ function finalizar(){
 
     formaPagamento = formaPagamento.value;
 
-    let msg = "💜 *LOGUS AÇAÍ* 💜\n";
+    let msg = "💜🍇 *LOGUS AÇAÍ* 🍇💜\n";
     msg += "━━━━━━━━━━━━━━\n\n";
 
     carrinho.forEach(i => {
 
-        msg += ` *${i.nome}*\n`;
-        msg += `🍧 *${i.nomeTam}*\n`;
+        msg += `🍧 *${i.nome} - ${i.nomeTam}*\n`;
 
         if(i.caldas && i.caldas.length > 0){
             msg += `🍯 Caldas: ${i.caldas.join(", ")}\n`;
@@ -316,6 +321,11 @@ function finalizar(){
             msg += `➕ Adicionais: ${i.adds.join(", ")}\n`;
         }
 
+        // ✅ FRUTAS
+        if(i.frutas && i.frutas.length > 0){
+            msg += `🍓 Frutas: ${i.frutas.join(", ")}\n`;
+        }
+
         msg += `💲 Valor: R$${i.valor.toFixed(2)}\n\n`;
     });
 
@@ -323,5 +333,10 @@ function finalizar(){
     msg += `💰 *Total: R$${total.toFixed(2)}*\n`;
     msg += `💳 Pagamento: ${formaPagamento}\n`;
 
-    window.open("https://wa.me/5587991292282?text=" + encodeURIComponent(msg));
-}
+    // 🧠 pega nome do cliente (opcional)
+    let nomeCliente = document.getElementById("nomeCliente")?.value;
+    if(nomeCliente){
+        msg += `👤 Cliente: ${nomeCliente}\n`;
+    }
+
+    window.open(
