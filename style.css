@@ -160,7 +160,9 @@ input, select {
     background: linear-gradient(135deg, #ffe066, #ffd700);
     color: black;
 }
-
+.fruta-opcao {
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+}
 
 /* =========================
    SELECIONADO
