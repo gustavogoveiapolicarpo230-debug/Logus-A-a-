@@ -339,4 +339,5 @@ function finalizar(){
         msg += `👤 Cliente: ${nomeCliente}\n`;
     }
 
-    window.open(
+    window.open("https://wa.me/5587991292282?text=" + encodeURIComponent(msg));
+}
